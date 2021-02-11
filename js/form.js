@@ -16,13 +16,21 @@ class Product{
 
     };
 
-    removeProduct(){
+    removeProduct(e){
+        e.currentTarget;
+    };
+    /* showNotifications(){
 
-    }
+    } */
+
+    
 }
 
 let form = document.forms[0];
+let buttons = document.getElementsByClassName('btn-warning');
+
 form.onsubmit = addProduct;
+products.onclick = removeProduct;
 
 function addProduct(e){
     e.preventDefault();
@@ -31,6 +39,11 @@ function addProduct(e){
     console.log(product);
 }
 
-function(){
+function removeProduct(e){
+    if(e.target.className == "btn btn-warning"){
+        e.target.parentNode.remove();    
+    }
 
 }
+
+
