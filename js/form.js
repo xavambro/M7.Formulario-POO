@@ -5,7 +5,7 @@ class Product{
         this.price = price;
         this.year = year;    
     }
-    
+
     showProduct(){
         let newDiv = document.createElement("div");
         let newButton = document.createElement("button")
@@ -13,6 +13,7 @@ class Product{
         newButton.className="btn btn-warning";
         newButton.textContent = "Delete";
         newDiv.appendChild(newButton);
+        newDiv.className = "product";
         document.getElementById("products").appendChild(newDiv);
     }
     
@@ -34,8 +35,8 @@ function addProduct(e){
         notification("alert alert-danger","El producto no se ha podido añadir correctamente. Rellena todos los campos");
         errors++;
     }
-    if(e.currentTarget[1].value == ""){
-        showErrors(document.getElementById("price"),"errorPrice","El campo está vacío");  
+    if(e.currentTarget[1].value == ""|| !validPrice(e.currentTarget[1].value)){
+        showErrors(document.getElementById("price"),"errorPrice","El campo está vacío y ha de contener números.");  
         notification("alert alert-danger","El producto no se ha podido añadir correctamente. Rellena todos los campos");       
         errors++;
     }
@@ -73,8 +74,10 @@ function notification(alert, message){
 function showErrors(input,error,message){
     input.classList.add("is-invalid");
 	document.getElementById(error).textContent = message;
-	
-
 }
 
 
+function validPrice(pric) {
+	var regex = /^-?\d+\.?\d*$/;
+	return regex.test(pric) ? true : false;
+}
